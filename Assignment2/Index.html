@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Nagaraj Assignment2</title>
+    
+    <link rel="stylesheet" href="../Assignment2/style.css">
+    <script src="../Assignment2/index.js"></script> 
+    <script>
+        let db = new userDatabase();
+        function displayAll(){
+            const table = document.getElementById("tblRecords");
+            table.innerHTML = `<tr><th>User Name</th><th>Email ID</th><th>User Address</th></tr>`;
+            const data = db.data;
+            for (const cst of data) {
+                const rec = `<tr><td>${cst.id}</td><td>${cst.name}</td><td>${cst.address}</td></tr>`;
+                table.innerHTML += rec;
+            }
+        }
+        function addNewUser(){
+            const id = document.getElementById("cstId").value;
+            const name = document.getElementById("cstName").value;
+            const address = document.getElementById("cstAddress").value;
+            const cst = new Customer(id, name, address);
+            db.addRecord(cst);
+            displayAll();
+            
+        }
+       
+    </script>
+</head>
+
+<body>
+    <div class="card">
+        <h2 class="simple">USER RECORDS</h2>
+        <p><label>User Name   <input type="text" id="cstId" placeholder="Enter User name"></label></p>
+        <p><label>Email ID   <input type="email" id="cstName" placeholder="Enter Email ID"></label></p>
+        <p><label>Address   <input type="text" id="cstAddress" placeholder="Enter Address"></label></p>
+        <p><button onclick="addNewUser()">Add New Record</button></p>
+    </div>
+
+    <div>
+        <table border="2" id="tblRecords">
+
+        </table>
+    </div>
+</body>
+</html>
